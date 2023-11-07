@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Vaccine</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="full-page">
+        <div class="navbar">
+            <nav>
+                <ul id='MenuItems'>
+                    <li><a href='/login'>Home</a></li>
+                    <li><a href='https://covid19.who.int/'>About</a></li>
+                    <li><button class='loginbtn' onclick="document.getElementById('login-form').style.display='block'" style="width:auto;">Login</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div id='login-form'class='login-page'>
+            <div class="form-box">
+                <div class='button-box'>
+                    <div id='btn'></div>
+                    <button type='button'onclick='login()'class='toggle-btn'>Log In</button>
+                    <button type='button'onclick='register()'class='toggle-btn'>Register</button>
+                </div>
+                <form id='login' class='input-group-login' method='POST' action='{{ url_for('login') }}'>
+                    <input type='text' class='input-field' placeholder='Aadhaar Number' name='aadhaar_number' required>
+                    <input type='text' class='input-field' placeholder='Mobile Number' name='mobile_no' required>
+                    <button type='submit' class='submit-btn'>Log in</button>
+                </form>
+                <form id='register' class='input-group-register' method='POST' action='{{ url_for('register') }}'>
+                    <input type='text' class='input-field' placeholder='Enter Aadhaar Number' name='aadhaar_number' required>
+                    <input type='text' class='input-field' placeholder='Enter Full Name' name='name' required>
+                    <input type='text' class='input-field' placeholder='Enter Date of Birth' name='dob' required>
+                    <input type='text' class='input-field' placeholder='Enter Mobile Number' name='mobile_no' required>
+                    <input type='text' class='input-field' placeholder='Enter No Of Doses' name='dose' required>
+                    <input type='text' class='input-field' placeholder='Enter Vaccine Name' name='vaccine_name' required>
+                    <input type='checkbox' class='check-box' required><span>I agree to the terms and conditions</span>
+                    <button type='submit' class='submit-btn'>Register</button>
+                </form>
+            </div>
+        </div>
+        <div id='details' class='details-page' style="display:none;">
+            <div class="...">
+
+    </div>
+    <script>
+        var x=document.getElementById('login');
+		var y=document.getElementById('register');
+		var z=document.getElementById('btn');
+        var details = document.getElementById("details");
+
+		function register()
+		{
+			x.style.left='-400px';
+			y.style.left='50px';
+			z.style.left='110px';
+		}
+		function login()
+		{
+			x.style.left='50px';
+			y.style.left='450px';
+			z.style.left='0px';
+		}
+	</script>
+	<script>
+        var modal = document.getElementById('login-form');
+        window.onclick = function(event) 
+        {
+            if (event.target == modal) 
+            {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>

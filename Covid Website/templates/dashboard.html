@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Covid Vaccine</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for('static', filename='covid-19-vaccine.jpg') }}'); /* Corrected image URL */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333; /* Text color */
+        }
+
+        .navbar {
+            background-color: #4CAF50; /* Navbar background color */
+            padding: 10px 0;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        .navbar li {
+            margin: 0 20px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white; /* Navbar link color */
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            color: #FFC107; /* Navbar link color on hover */
+        }
+
+        h1 {
+            color: #4CAF50; /* Heading color */
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        table {
+            width: 60%;
+            margin: 50px auto;
+            border-collapse: collapse;
+            border: 1px solid #ccc;
+        }
+
+        table th, table td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            /* Update background and text colors */
+            background-color: #f2f2f2; /* Light gray background */
+            color: #333; /* Text color */
+        }
+        
+        p {
+            color: #4CAF50; /* Heading color */
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff; /* White background for the form */
+            border: 1px solid #ddd;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555; /* Label text color */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50; /* Green button background */
+            color: white; /* Button text color */
+            border: none;
+            padding: 10px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <nav>
+            <ul>
+                <li><a href='https://covid19.who.int/'>About</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
+    <h1>Dashboard</h1>
+    <table>
+        <tr>
+            <td>Aadhaar Number:</td>
+            <td>{{ user[1] }}</td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>{{ user[2] }}</td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>{{ user[3] }}</td>
+        </tr>
+        <tr>
+            <td>Mobile Number:</td>
+            <td>{{ user[4] }}</td>
+        </tr>
+        <tr>
+            <td>Dose:</td>
+            <td>{{ user[5] }}</td>
+        </tr>
+        <tr>
+            <td>Vaccine Name:</td>
+            <td>{{ user[6] }}</td>
+        </tr>
+    </table>
+    <!-- Display success message if applicable -->
+    {% if success_message %}
+    <p>{{ success_message }}</p>
+    {% endif %}
+    <form action="{{ url_for('dashboard', aadhaar_number=user[1]) }}" method="post">
+        <label for="dose">Update Dose:</label>
+        <input type="text" name="dose" id="dose" value="{{ user[5] }}" required><br>
+        <label for="vaccine_name">Update Vaccine Name:</label>
+        <input type="text" name="vaccine_name" id="vaccine_name" value="{{ user[6] }}" required><br>
+        <button type="submit">Update Details</button>
+    </form>
+</body>
+</html>
